@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 style=" color:red">ROLEAPP</h1>
+
+{% for race in races %}
+    <div class="race__container"></div>
+        <ul>
+            <li>{{ race.name }}</li>
+            <li>{{ race.subRace }}</li>
+        </ul>
+
+{% endfor %}
+
+{% for user in users %}
+    <div class="race__container"></div>
+        <span>{{ user.username }}</span>
+{% endfor %}
+
+</body>
+</html>
