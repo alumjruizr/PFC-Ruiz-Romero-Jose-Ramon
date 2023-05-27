@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Sheet</title>
+</head>
+<body>
+
+<form action="{% url 'character_sheet_view' %}" method="post">
+      {% csrf_token %}
+      <label for="name">Username</label>
+      <input type="text" name="name" id="name">
+
+      <label for="race">Race</label>
+      <input type="text" name="race" id="race">
+
+      <label for="class">Class</label>
+      <input type="text" name="class" id="class">
+
+      <label for="strenght">Strength</label>
+      <input type="number" name="strenght" id="strenght">
+
+      <label for="dexterity">Dexterity</label>
+      <input type="number" name="dexterity" id="dexterity">
+
+      <label for="constitution">Constitution</label>
+      <input type="number" name="constitution" id="constitution">
+
+      <label for="wisdom">Wisdom</label>
+      <input type="number" name="wisdom" id="wisdom">
+
+      <label for="intelligence">Intelligence</label>
+      <input type="number" name="intelligence" id="intelligence">
+
+      <label for="charisma">Charisma</label>
+      <input type="number" name="charisma" id="charisma">
+
+      <label for="actualLevel">Actual Level</label>
+      <input type="number" name="actualLevel" id="actualLevel">
+
+      <input type="submit">
+</form>
+</body>
+</html>
