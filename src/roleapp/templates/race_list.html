@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +21,8 @@
     <div class="race__container"></div>
         <span>{{ user.username }}</span>
 {% endfor %}
+<br>
+<img src="{% static 'dice.png' %}" style="height:50pt">
 
 </body>
 </html>

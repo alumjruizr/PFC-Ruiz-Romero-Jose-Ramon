@@ -17,7 +17,7 @@ class LoginView(View):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-            return HttpResponse(content=b'Success')
+            return HttpResponse(render(request, 'roleapp/charactersheet_list.html'))
         return self.get(request)
 
 
@@ -27,3 +27,12 @@ class LogoutView(View):
         if request.user.is_authenticated:
             logout(request)
         return redirect('login')
+
+
+class RegistrationView(View):
+
+    def get(self, request):
+        return render(request, 'registration.html')
+
+    def post(self, request):
+        user = regi

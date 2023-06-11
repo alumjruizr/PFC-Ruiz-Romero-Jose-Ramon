@@ -1,20 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% load static %}
 
-<form action="{% url 'login' %}" method="post">
-      {% csrf_token %}
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username">
+{% block content %}
 
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password">
+<div class="half" style="margin: 4%">
+    <div class="bg order-1 order-md-2"></div>
+        <div class="contents order-2 order-md-1">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-6">
+                    <div class="form-block">
+                        <div class="text-center mb-5">
+                            <img src="{% static 'dices.png' %}" alt="">
+                            <h3>Login to <strong>RoleApp</strong></h3>
+                        </div>
+                        <form action="{% url 'login' %}" method="post">
+                            <div class="form-group first">
+                                <input type="text" class="form-control" placeholder="Your username" id="username"
+                                       name="username">
+                            </div>
+                            <div class="form-group last mb-3">
+                                <input type="password" class="form-control" placeholder="Your Password" id="password"
+                                       name="password">
+                            </div>
+                                <div class="form-group last mb-3">
+                                <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                        </div>
+                        </form>
 
-      <input type="submit">
-</form>
-</body>
-</html>
+                        <div class="form-group last last mb-3">
+                            <a href="{% url 'registration' %}"
+                                   role="button"
+                                   class="btn btn-block btn-light "
+                                   style="background-color: lightgray; color: black"
+                                >Sign Up for free</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

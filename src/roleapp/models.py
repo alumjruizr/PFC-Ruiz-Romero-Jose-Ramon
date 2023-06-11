@@ -3,6 +3,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from polymorphic.models import PolymorphicModel
+
 
 # Modelo de raza
 class Race(models.Model):
@@ -44,49 +46,40 @@ class CharacterClass(models.Model):
     def __str__(self):
         return self.name
 
-    # FIXME: Arreglar el asignador de subclases
-    def subclasses(self):
-        if self.name == "Barbarian":
-            return (
-                ('Berserker', 'Berserker'),
-                ('Totem Warrior', 'Totem Warrior'),
-            )
-        else:
-            return (
-                ('Prueba', 'Prueba'),
-                ('Prueba2', 'Prueba2')
-            )
+    subClass = models.CharField(max_length=30)
 
-    SUBCLASS_NAMES = subclasses(name)
-    subClass = models.CharField(max_length=30, choices=SUBCLASS_NAMES)
 
 # Modelo de objetos
 
 
-class Item(models.Model):
+class Item(PolymorphicModel):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     description = models.TextField()
-
-    def __str__(self):
-        return self.name
 
 
 class Armor(Item):
     armorClass = models.IntegerField()
     dexterityMod = models.IntegerField()
 
+    def __str__(self):
+        return self.name
 
-class Weapon(models.Model):
-    class atribute(models.TextChoices):
-        DEXTERITY = 'DEX', ('Dexterity')
-        STRENGTH = 'STR', ('Strength')
 
+class Weapon(Item):
+    ATTRIBUTE = (
+        ('DEX', 'Dexterity'),
+        ('STR', 'Strength')
+    )
+
+    attribute = models.CharField(max_length=20, choices=ATTRIBUTE, null=True)
     dice = models.CharField(max_length=4)
-    competence = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
 
 
-class MagicItem(models.Model):
+class MagicItem(Item):
     RARITY = (
         ('Common', 'Common'),
         ('Uncommon', 'Uncommon'),
@@ -98,14 +91,17 @@ class MagicItem(models.Model):
     )
     rarity = models.CharField(max_length=20, choices=RARITY)
 
+    def __str__(self):
+        return self.name
+
 
 # Modelo de la hoja de personaje
-class characterSheet(models.Model):
+class CharacterSheet(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
-    characterClass = models.ForeignKey('CharacterClass', on_delete=models.CASCADE)
-    race = models.ForeignKey('Race', on_delete=models.CASCADE)
+    characterClass = models.ForeignKey('CharacterClass', related_name='characterClass', on_delete=models.CASCADE)
+    race = models.ForeignKey('Race', related_name='race', on_delete=models.CASCADE)
     strength = models.IntegerField()
     dexterity = models.IntegerField()
     constitution = models.IntegerField()
@@ -113,7 +109,7 @@ class characterSheet(models.Model):
     intelligence = models.IntegerField()
     charisma = models.IntegerField()
     actualLevel = models.IntegerField()
-    equipment = models.ManyToManyField('Item', help_text="Añada un objeto")
+    equipment = models.ManyToManyField('Item', blank=True, related_name='equipment')
 
     def __str__(self):
         return self.name
