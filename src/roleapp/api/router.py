@@ -4,7 +4,7 @@ from roleapp.api.views import *
 
 router = DefaultRouter()
 
-router.register(prefix='raceList', basename='raceList', viewset=RaceListApiView)
+router.register(prefix='race', basename='race', viewset=RaceApiView)
 router.register(prefix='characterClass', basename='characterClass', viewset=CharacterClassApiView)
 router.register(prefix='characterSheet', basename='characterSheet', viewset=CharacterSheetApiView)
 router.register(prefix='item', basename='item', viewset=ItemApiView)

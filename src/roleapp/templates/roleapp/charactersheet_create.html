@@ -5,28 +5,25 @@
 
 {% block content %}
 
-<form class="form" action="{% url 'charactersheet-create-view' %} " method="post" enctype='multipart/form-data'>
-    {{ charactercreation_formset.management_form }}
+<form class="form" action="{% url 'charactersheet-create-view' %} " method="post">
     {% csrf_token %}
 <div class="row align-items-center justify-content-center">
     <section class="buttons">
         <div class="form-group">
-            {% crispy form %}
-            {% for form in charactercreation_formset %}
 
-                    {{form}}
-            {% endfor %}
+                    {% crispy form %}
+
             <section class="buttons">
                 <div class="form-group">
                     <div class="form-group last mb-3">
-                        <input type="submit" value="Confirm changes" class="btn btn-block btn-primary">
+                        <input type="submit" value="Confirm" class="btn btn-block btn-primary">
 
                     </div>
                     <div class="form-group last last mb-3">
                         <a href="{% url 'character_sheet_list' %}"
                            role="button"
                            class="btn btn-block btn-danger"
-                        >Cancel changes</a>
+                        >Cancel</a>
                     </div>
                 </div>
             </section>
@@ -36,5 +33,4 @@
 </div>
 </form>
 {% endblock %}
-
 

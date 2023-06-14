@@ -13,6 +13,7 @@ import datetime
 from pathlib import Path
 import os
 from django.db.models import Count
+from rest_framework.reverse import reverse, reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'roleapp.apps.RoleappConfig',
     'users.apps.UsersConfig',
     'polymorphic',
+    'crispy_forms',
+    'crispy_bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -48,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -150,7 +153,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #    }
 # }
 
-LOGIN_URL = '/login/'
+LOGIN_URL = 'registration/login/'
+LOGIN_REDIRECT_URL = reverse_lazy('character_sheet_list')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -167,3 +173,5 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3)
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,11 +1,11 @@
-asgiref==3.3.1
+asgiref==3.7.2
 certifi==2022.12.07
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
 coverage==5.4
 Django~=3.2.10
-django-crispy-forms==1.7.0
+django-crispy-forms==1.14.0
 djangorestframework==3.12.2
 idna==2.10
 itypes==1.2.0
@@ -18,4 +18,3 @@ uritemplate==3.0.1
 urllib3==1.26.5
 gunicorn==20.0.4
 djangorestframework-jwt==1.11.0
-psycopg2-binary==2.8.6
