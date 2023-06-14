@@ -1,4 +1,5 @@
 from django.contrib import contenttypes
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
@@ -11,7 +12,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 class LoginView(View):
     def get(self, request):
-        return render(request, 'login.html')
+        return render(request, 'registration/login.html')
 
     def post(self, request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])

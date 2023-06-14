@@ -6,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('roleapp.urls')),
     path('api/login/', obtain_jwt_token),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]

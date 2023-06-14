@@ -109,6 +109,10 @@ class CharacterSheet(models.Model):
     intelligence = models.IntegerField()
     charisma = models.IntegerField()
     actualLevel = models.IntegerField()
+    currentHitPoints = models.IntegerField()
+    experiencePoints = models.IntegerField(default=0)
+    isInspired = models.BooleanField(default=False)
+    alignment = models.CharField(max_length=20, default="Neutral")
     equipment = models.ManyToManyField('Item', blank=True, related_name='equipment')
 
     def __str__(self):

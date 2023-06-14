@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<body>
+
+<div class="content-wrapper">
+    <h1 class="content-header-title mb-0">
+        Your Characters</h1></br>
+    <a href="{% url 'charactersheet-create-view' %}"
+       role="button"
+       class="btn btn-success"
+    >Create character</a>
+    <div class="characterSheetList">
+
+        {% for characterSheet in characterSheets %}
+        <div class="row resizable-row" min-width="0 576px 768px" max-width="991.98px 1199.98px 1399.98px">
+            <a href="{% url 'charactersheet-detail-view' characterSheet.pk %}" class="charactercard">
+                <div class="card bg-light mb-3 font-" style="max-width: 13rem;">
+                    <div class="card-header font-weight-bold">{{ characterSheet.name }} the
+                        {{characterSheet.characterClass}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">
+                        <ul>
+                            <li> Race: {{ characterSheet.race }}</li>
+                            <li> Actual level: {{ characterSheet.actualLevel }}</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        {% endfor %}
+
+    </div>
+    <br>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/charactersheetlist.css' %}">
+</div>
+</body>
+{% endblock %}
