@@ -1,0 +1,35 @@
+ul {
+    list-style: none;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-underline: none;
+}
+
+.charactercard {
+    margin: 1%
+}
+
+.row {
+    position: relative;
+}
+
+html body .content-wrapper {
+    padding: 1.8rem;
+}
+
+html body .content-wrapper .content-header-title {
+
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #343a40
+}
+
+div {
+    display: block;
+}
